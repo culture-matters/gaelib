@@ -3,6 +3,7 @@ import logging
 
 import jinja2
 from flask import g, Flask, request
+from gaelib.defaults import DATASTORE_PROJECT_ID, GOOGLE_CLOUD_PROJECT
 from google.cloud.logging.client import Client
 from google.cloud.logging.handlers.app_engine import AppEngineHandler
 from gaelib.env import (is_dev,
@@ -22,6 +23,8 @@ from gaelib.urls import (auth_urls,
                          client_logger_urls,
                          task_urls)
 from firebase_admin import credentials, initialize_app
+
+from gaelib.env import (get_app_or_default_prop)
 
 PARAMETER_LOGGING = get_app_or_default_prop('PARAMETER_LOGGING')
 
@@ -71,8 +74,8 @@ def startup(auth=True, parameter_logging=False, client_logging=False, dashboard=
 
   if is_dev():
     os.environ['DATASTORE_EMULATOR_HOST'] = 'localhost:8089'
-    os.environ['DATASTORE_PROJECT_ID'] = 'codejedi-crypticcup-staging'
-    os.environ['GOOGLE_CLOUD_PROJECT'] = 'codejedi-crypticcup-staging'
+    os.environ['DATASTORE_PROJECT_ID'] = get_app_or_default_prop(DATASTORE_PROJECT_ID)
+    os.environ['GOOGLE_CLOUD_PROJECT'] = get_app_or_default_prop(GOOGLE_CLOUD_PROJECT)
     # Dumb hack we need to run locally
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.getcwd() + \
         '/fake_creds.json'

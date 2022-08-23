@@ -11,6 +11,12 @@ SESSION_SECRET = 'lib_key'
 # TODO: Move this to a more generic bucket name
 DEFAULT_PROFILE_IMAGE = 'https://storage.googleapis.com/crypticcup-images/default_profile.jpg'
 
+#App Engine Settings
+DEFAULT_STORAGE_BUCKET = ''
+APP_STORAGE_BUCKET = ''
+DATASTORE_PROJECT_ID = ''
+GOOGLE_CLOUD_PROJECT = ''
+
 # Twilio Auth Settings
 VERIFICATION_SID = ''
 ACCOUNT_SID = ''
